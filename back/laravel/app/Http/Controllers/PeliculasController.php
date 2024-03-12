@@ -13,16 +13,18 @@ class PeliculaController extends Controller
     }
 
     public function createPeliculas(Request $request){
+
         
         $pelicula = new Peliculas;
 
-        $pelicula->title = $request->title;
-        $pelicula-> descripcion = $request->descripcion;
+        $pelicula->titol = $request->titol;
+        $pelicula-> descripcio = $request->descripcion;
         $pelicula->cartell = $request->cartell;
-        $pelicula->genere = $request->genere;
         $pelicula->duracio = $request->duracio;
+        $pelicula->any = $request->any;
+        $pelicula->director = $request->director;
 
-        $new =$request->cartell . '_'. $request->title . '.jpg';
+        $new =$request->cartell . '_'. $request->titol . '.jpg';
         $src = $request->file('img')->storeAs('imagen', $new, [ 'disk' => 'peliculs']);
         $src->imatge = $src;
         $pelicula->save();
@@ -30,6 +32,9 @@ class PeliculaController extends Controller
         session()->save();
         return redirect()->route("peliculas");
     }
+
+
+    
 }
 
 
