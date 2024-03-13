@@ -21,7 +21,7 @@ class Peliculas extends Seeder
             foreach($data['peliculas'] as $item){
                 DB::table('peliculas')->insert([
                     'titol' => $item['titol'],
-                    'descripcion' => $item['descripcio'],
+                    'descripcio' => $item['descripcio'],
                     'cartell' => $item['cartell'],
                     'duracio' => $item['duracio'],
                     'any' => $item['any'],

@@ -9,7 +9,7 @@ class Peliculas extends Model
 {
     protected $filleable = [
         'titol',
-        'descripcion',
+        'descripcio',
         'cartell',
         'duracio',
         'any',

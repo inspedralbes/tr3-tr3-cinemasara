@@ -4,7 +4,7 @@
         {
           "titol": "Dragon Ball",
           "descripcio": "Goku, un jove guerriller Saiyan, s'uneix amb altres guerrillers per protegir la Terra de les forces del mal que volen destruir-la.",
-          "cartell": "https://ejemplo.com/dragon_ball_cartell.jpg",
+          "cartell": "https://m.media-amazon.com/images/M/MV5BYzI0YjYxY2UtNzRjNS00NTZiLTgzMDItNGEzMjU5MmE0ZWJmXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_SX300.jpg",
           "duracio": "120 minuts",
           "any": 1986,
           "director": "Daisuke Nishio"
@@ -12,7 +12,7 @@
         {
           "titol": "El Llop de Wall Street",
           "descripcio": "Basada en la història real de Jordan Belfort, un corredor de borsa de Nova York que es va involucrar en activitats il·legals al món de les finances.",
-          "cartell": "https://ejemplo.com/lobo_wall_street_cartell.jpg",
+          "cartell": "https://m.media-amazon.com/images/M/MV5BMjIxMjgxNTk0MF5BMl5BanBnXkFtZTgwNjIyOTg2MDE@._V1_SX300.jpg",
           "duracio": "180 minuts",
           "any": 2013,
           "director": "Martin Scorsese"
@@ -20,15 +20,15 @@
         {
           "titol": "Barbie",
           "descripcio": "Barbie i les seves amigues viuen aventures emocionants mentre exploren móns diferents i aprenen valors importants com l'amistat i la determinació.",
-          "cartell": "https://ejemplo.com/barbie_cartell.jpg",
+          "cartell": "https://m.media-amazon.com/images/M/MV5BNjU3N2QxNzYtMjk1NC00MTc4LTk1NTQtMmUxNTljM2I0NDA5XkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg",
           "duracio": "90 minuts",
-          "any": 2020,
+          "any": 2023,
           "director": "Greta Gerwig"
         },
         {
           "titol": "Oppenheimer",
           "descripcio": "Una pel·lícula biogràfica sobre la vida de J. Robert Oppenheimer, el físic que va dirigir el projecte Manhattan durant la Segona Guerra Mundial.",
-          "cartell": "https://ejemplo.com/oppenheimer_cartell.jpg",
+          "cartell": "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_SX300.jpg",
           "duracio": "150 minuts",
           "any": 2023,
           "director": "Christopher Nolan"
@@ -36,7 +36,7 @@
         {
           "titol": "Interstellar",
           "descripcio": "Un grup d'astronautes es llança a l'espai en una missió per trobar un nou planeta habitable per a la humanitat, ja que la Terra esdevé cada vegada més inhòspita.",
-          "cartell": "https://ejemplo.com/interstellar_cartell.jpg",
+          "cartell": "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
           "duracio": "169 minuts",
           "any": 2014,
           "director": "Christopher Nolan"
@@ -44,7 +44,7 @@
         {
           "titol": "Blade Runner 2049",
           "descripcio": "En un futur distòpic, un agent de policia descobreix un secret que pot canviar el curs de la humanitat mentre investiga un cas de desaparició de replicants.",
-          "cartell": "https://ejemplo.com/blade_runner_2049_cartell.jpg",
+          "cartell": "https://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_SX300.jpg",
           "duracio": "164 minuts",
           "any": 2017,
           "director": "Denis Villeneuve"
@@ -52,7 +52,7 @@
         {
           "titol": "Batman",
           "descripcio": "El vigilant enmascarat de Gotham City lluita contra el crim a la ciutat mentre s'enfronta als seus propis dimonis interns.",
-          "cartell": "https://ejemplo.com/batman_cartell.jpg",
+          "cartell": "https://m.media-amazon.com/images/M/MV5BZWQ0OTQ3ODctMmE0MS00ODc2LTg0ZTEtZWIwNTUxOGExZTQ4XkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_SX300.jpg",
           "duracio": "152 minuts",
           "any": 1989,
           "director": "Tim Burton"
@@ -60,7 +60,7 @@
         {
           "titol": "Deadpool",
           "descripcio": "Un mercenari desfigurat busca venjança contra l'home que li va causar la seva transformació, utilitzant el seu sentit de l'humor peculiar i les seves habilitats de lluita.",
-          "cartell": "https://ejemplo.com/deadpool_cartell.jpg",
+          "cartell": "https://m.media-amazon.com/images/M/MV5BYzE5MjY1ZDgtMTkyNC00MTMyLThhMjAtZGI5OTE1NzFlZGJjXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
           "duracio": "108 minuts",
           "any": 2016,
           "director": "Tim Miller"
@@ -68,7 +68,7 @@
         {
           "titol": "In Time",
           "descripcio": "En un món on el temps és la moneda, un home empobrit s'enfronta al sistema establert quan rep una quantitat enorme de temps i decideix lluitar contra la injustícia.",
-          "cartell": "https://ejemplo.com/in_time_cartell.jpg",
+          "cartell": "https://m.media-amazon.com/images/M/MV5BMjA3NzI1ODc1MV5BMl5BanBnXkFtZTcwMzI5NjQwNg@@._V1_SX300.jpg",
           "duracio": "109 minuts",
           "any": 2011,
           "director": "Andrew Niccol"
@@ -76,39 +76,23 @@
         {
           "titol": "Mad Max",
           "descripcio": "En un futur post-apocalíptic, un ex policia busca la redempció mentre lluita contra bandes de violents delinqüents que dominen les terres desolades.",
-          "cartell": "https://ejemplo.com/mad_max_cartell.jpg",
+          "cartell": "https://m.media-amazon.com/images/M/MV5BMTM4Mjg5ODEzMV5BMl5BanBnXkFtZTcwMDc3NDk0NA@@._V1_SX300.jpg",
           "duracio": "120 minuts",
           "any": 1979,
           "director": "George Miller"
         },
         {
-          "titol": "Bola de Drac Z: El pare d'en Son Goku",
-          "descripcio": "Una nova aventura comença quan en Goku descobreix el seu veritable origen i la llegenda dels guerrillers Saiyan.",
-          "cartell": "https://ejemplo.com/bola_de_drac_z_el_pare_cartell.jpg",
-          "duracio": "95 minuts",
-          "any": 1990,
-          "director": "Daisuke Nishio"
-        },
-        {
           "titol": "Bola de Drac Z: Els guerrers de les galàxies",
           "descripcio": "Goku i els seus amics es troben amb nous enemics i han d'unir forces per protegir la Terra una vegada més.",
-          "cartell": "https://ejemplo.com/bola_de_drac_z_els_guerrers_cartell.jpg",
+          "cartell": "https://m.media-amazon.com/images/M/MV5BYTc0ZWQ3NTEtNDJhNC00MjliLWEwZTgtZDJjMjcwZTFlNmE0XkEyXkFqcGdeQXVyMzM4MjM0Nzg@._V1_SX300.jpg",
           "duracio": "100 minuts",
           "any": 1992,
           "director": "Daisuke Nishio"
         },
         {
-          "titol": "Dragon Ball Super: Broly",
-          "descripcio": "Goku, Vegeta i Broly es troben en una batalla èpica que posarà a prova les seves habilitats i poders.",
-          "cartell": "https://ejemplo.com/dragon_ball_super_broly_cartell.jpg",
-          "duracio": "123 minuts",
-          "any": 2018,
-          "director": "Tatsuya Nagamine"
-        },
-        {
           "titol": "Bola de drac Z: El duet perillós! Els superguerrers no dormen",
           "descripcio": "Goku i Vegeta han de detenir una nova amenaça mentre també lluiten contra el son.",
-          "cartell": "https://ejemplo.com/bola_de_drac_z_el_duet_cartell.jpg",
+          "cartell": "https://m.media-amazon.com/images/M/MV5BZTE4OTExYjUtYzlmYS00YjdjLWE1NmUtN2M1Y2RlOGQxNzZlXkEyXkFqcGdeQXVyMzM4MjM0Nzg@._V1_SX300.jpg",
           "duracio": "95 minuts",
           "any": 1994,
           "director": "Shigeyasu Yamauchi"
@@ -116,7 +100,7 @@
         {
           "titol": "Dragon Ball Z: Los Mejores Rivales",
           "descripcio": "Goku i els seus amics s'enfronten a alguns dels seus rivals més poderosos en una sèrie d'èpics combats.",
-          "cartell": "https://ejemplo.com/dragon_ball_z_los_mejores_rivales_cartell.jpg",
+          "cartell": "https://m.media-amazon.com/images/M/MV5BZTdhYTc2OGYtZDQ3Zi00NTBmLWFhN2MtYmUwNGJiOWQ4NDUzXkEyXkFqcGdeQXVyMzM4MjM0Nzg@._V1_SX300.jpg",
           "duracio": "90 minuts",
           "any": 1991,
           "director": "Shigeyasu Yamauchi"
@@ -124,7 +108,7 @@
         {
           "titol": "Dragon Ball Z: Los Guerreros de Plata",
           "descripcio": "Goku i els seus aliats han de derrotar a un grup de cíborgs creats pel malvat Dr. Gero.",
-          "cartell": "https://ejemplo.com/dragon_ball_z_los_guerreros_de_plata_cartell.jpg",
+          "cartell": "https://m.media-amazon.com/images/M/MV5BNTI3NmE2M2QtMDBhMy00N2Q5LTgxNzEtZDllNzE5ZThiNzk4XkEyXkFqcGdeQXVyMzM4MjM0Nzg@._V1_SX300.jpg",
           "duracio": "95 minuts",
           "any": 1993,
           "director": "Shigeyasu Yamauchi"
@@ -132,7 +116,7 @@
         {
           "titol": "Dragon Ball Z:¡Fusion!",
           "descripcio": "Goku i Vegeta es fusionen en un nou guerriller anomenat Gogeta per derrotar un poderós enemic.",
-          "cartell": "https://ejemplo.com/dragon_ball_z_fusion_cartell.jpg",
+          "cartell": "https://m.media-amazon.com/images/M/MV5BOWRiNDJlNzAtZjk3ZC00NDhjLTlmNzMtNTJiNDM2NDU3NjI2XkEyXkFqcGdeQXVyMzM4MjM0Nzg@._V1_SX300.jpg",
           "duracio": "90 minuts",
           "any": 1995,
           "director": "Shigeyasu Yamauchi"
