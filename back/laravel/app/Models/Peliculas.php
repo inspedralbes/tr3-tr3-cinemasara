@@ -5,7 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pelicula extends Model
+class Peliculas extends Model
 {
-    use HasFactory;
+    protected $filleable = [
+        'titol',
+        'descripcion',
+        'cartell',
+        'duracio',
+        'any',
+        'director',
+    ];
 }
