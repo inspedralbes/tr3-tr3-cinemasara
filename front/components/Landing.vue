@@ -16,57 +16,75 @@
 </template>
   
 <style scoped>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
 .container {
-  text-align: center;
-  margin: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 h1 {
   text-align: center;
-  font-size: 2.5rem;
   margin-bottom: 30px;
 }
 
 .peliculas-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 20px;
-}
-
-.pelicula-container {
-  flex-basis: calc(33.33% - 20px); /* Tres películas por fila con espacio entre ellas */
-  margin-bottom: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 .pelicula {
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  padding: 20px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  overflow: hidden;
 }
 
 .pelicula-cartell {
-  max-width: 100%;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px 8px 0 0;
 }
 
-.pelicula-titol {
-  font-size: 1.5rem;
+.pelicula-info {
+  padding: 15px;
+}
+
+.pelicula-titulo {
+  margin-top: 0;
   margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .pelicula-director,
 .pelicula-any {
+  margin: 0;
   margin-bottom: 5px;
+  font-size: 16px;
 }
 
 .pelicula-descripcion {
-  font-style: italic;
+  margin: 0;
+  font-size: 16px;
+  color: #555;
 }
+</style>
 
-  </style>
+
   
   <script>
+  import {defineStore} from 'pinia';
+
   export default {
     data() {
       return {

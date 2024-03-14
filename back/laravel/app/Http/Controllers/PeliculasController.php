@@ -10,7 +10,7 @@ class PeliculasController extends Controller
 {
     public function getPeliculas(){
 
-        $peliculas = Peliculas::all();
+        $peliculas = Peliculas::inRandomOrder()->take(3)->get();
         return response()->json($peliculas);
     }
     public function show($id){
