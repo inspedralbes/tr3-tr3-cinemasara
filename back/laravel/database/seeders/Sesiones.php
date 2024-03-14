@@ -18,34 +18,25 @@ class Sesiones extends Seeder
         $peliculas = Peliculas::pluck('id_pelicula');
 
         if($peliculas->isEmpty()){
-            $this->command->info('No hay peliculas en la base de datos');
+            $this->command->info('No hay películas en la base de datos');
             return;
         }
 
+        $diaActual = Carbon::now()->dayOfWeek;
 
-        $fechaActual = Carbon::now();
-        $diaespectador = 3;
+        for ($dia = 1; $dia <= 7; $dia++) {
+   
+            $horaSesion = Carbon::createFromTime(16, 0)->format('H:i:s');
 
-        Sesion::create([
-            'id_pelicula' => $peliculas->random(),
-            'dia' => $diaespectador,
-            'hora' => Carbon::createFromTime(14,0)->format('H:i:s'),
-            'diaespectador' => 1,
-        ]);
+            $esDiaEspectador = ($dia == Carbon::WEDNESDAY);
 
-        for($i = 0; $i < 7; $i++){
-            if($i + 1 == $diaespectador){
-                continue;
-            }
+            Sesion::create([
+                'id_pelicula' => $peliculas->random(),
+                'dia' => $dia,
+                'hora' => $horaSesion,
+                'diaespectador' => $esDiaEspectador,
+            ]);
         }
-
-        $horaSesion = Carbon::createFromTime(14,0);
-        Sesion::create([
-            'id_pelicula' => $peliculas->random(),
-            'dia' => $i + 1,
-            'hora' => $horaSesion->format('H:i:s'),
-            'diaespectador' => 0,
-        ]);
-    } 
+    }
 }
 
