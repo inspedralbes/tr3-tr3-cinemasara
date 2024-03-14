@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_pelicula');
             $table->integer('dia');
             $table->time('hora');
-            $table->boolean('diaespectador');
+            $table->integer('diaespectador')->default(0);
             $table->timestamps();
 
             $table->foreign('id_pelicula')->references('id_pelicula')->on('peliculas');
