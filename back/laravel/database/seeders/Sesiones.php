@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Peliculas;
 use App\Models\Sesion;
 use Carbon\Carbon;
+use GuzzleHttp\Psr7\Request;
 
 class Sesiones extends Seeder
 {
@@ -15,28 +16,33 @@ class Sesiones extends Seeder
      */
     public function run(): void
     {
-        $peliculas = Peliculas::pluck('id_pelicula');
+        $peliculas = Peliculas::pluck('id_pelicula')->toArray();
+        shuffle($peliculas);
+        
 
-        if($peliculas->isEmpty()){
+        if(empty($peliculas)){
             $this->command->info('No hay películas en la base de datos');
             return;
         }
 
-        $diaActual = Carbon::now()->dayOfWeek;
+        $horaSesion = ['16:00', '18:00', '20:00'];
 
         for ($dia = 1; $dia <= 7; $dia++) {
    
-            $horaSesion = Carbon::createFromTime(16, 0)->format('H:i:s');
 
             $esDiaEspectador = ($dia == Carbon::WEDNESDAY);
 
             Sesion::create([
-                'id_pelicula' => $peliculas->random(),
+                'id_pelicula' => array_shift($peliculas),
                 'dia' => $dia,
-                'hora' => $horaSesion,
+                'hora' => $horaSesion[array_rand($horaSesion)],
                 'diaespectador' => $esDiaEspectador,
             ]);
         }
+    }
+
+    public function show(Request $request){
+        
     }
 }
 
