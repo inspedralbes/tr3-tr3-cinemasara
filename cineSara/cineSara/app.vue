@@ -1,5 +1,10 @@
 <template>
   <div>
-    <Landing />
+    <Header />
+    <NuxtPage :name="index" />
+    <Footer />
   </div>
 </template>
+<script>
+
+</script>
