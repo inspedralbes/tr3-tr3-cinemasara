@@ -43,14 +43,15 @@
 </style>
 
 <script>
+import { useStore } from '../stores/index';
 export default {
-    props: {
+  props: {
         pelicula: {
             type: Object,
             required: true
         }
-    }
-    
+    },
+ 
 }
 
 </script>
