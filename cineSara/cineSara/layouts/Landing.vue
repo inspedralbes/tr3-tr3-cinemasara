@@ -38,6 +38,7 @@
 
 <script>
 import { useStore } from '../stores/index';
+import {getPeliculas} from '../services/communicationManager.js';
 
 export default {
   data() {
@@ -46,22 +47,15 @@ export default {
     }
   },
   mounted() {
-    this.getPeliculas();
+    getPeliculas().then((response) => {
+      //pelicula : titol, descriocio, cartell, duracio, any, director, id_pelicula
+      this.peliculas = response;
+      return pelicula;
+    }).catch((error) => {
+      console.log(error);
+    });
   },
-  methods: {
-    async getPeliculas() {
-
-      try {
-        const res = await fetch('http://localhost:8000/api/peliculas');
-        if (!res.ok) {
-          throw new Error('Error al obtener las películas');                    
-        }
-        const data = await res.json();
-        this.peliculas = data;
-      } catch (error) {
-        console.error(error);
-      }
-    },
+  
     // selectPelicula(pelicula){
     //   useStore().setPeliculaId(pelicula.id_pelicula);
     //   this.$router.push({
@@ -69,6 +63,6 @@ export default {
         
     //   });
     // }
-  }
+  
 }
 </script>
