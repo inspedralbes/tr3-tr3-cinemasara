@@ -9,7 +9,9 @@
                     <p class="pelicula-director">Director: {{ pelicula.director }}</p>
                     <p class="pelicula-any">Any: {{ pelicula.any }}</p>
                     <p class="pelicula-descripcion">{{ pelicula.descripcio }}</p>
+                    <fichaSesion :sesion="sesion" :pelicula="pelicula" class="ficha-sesion" />
             </div>
+            
         </div>    
     </div>
 </template>
@@ -56,36 +58,38 @@
 <script>
 import { useStore } from '../stores/index';
 export default {
+  data() {
+    return {
+      sesion: null,
+      pelicula: null,
+    }
+  },
   props: {
         pelicula: {
             type: Object,
             required: true
         },
-        sesion: {
-            type: Array,
-            required: true
-        }
     },
-    mounted() {
+    mounted(){
         this.getSesion();
     },
-    
     methods: {
-       async getSesion(){
-            try{
-                const response = await fetch(`http://localhost:8000/api/sesiones/${this.$route.params.id_pelicula}`)
-                
-                if(!response.ok){
-                    throw new Error(data.message);
-                }                
-                const data = await response.json();
-                this.sesion = data;
-            }catch(error){
-              console.error("Error al obtener la sesión:", error);
-            }    
+      async getSesion (){
+        try{
+          if (this.pelicula) {
+            const response = await fetch(`http://localhost:8000/api/sesiones/${this.pelicula.id_pelicula}`);
+          if(!response.ok){
+            throw new Error('Error al obtener las sesiones');
+          }
+          const sesion = await response.json();
+          this.sesion = sesion;
+          }
+        }catch(error){
+          console.log("Error al obtener las sesiones", error);
         }
-    },
- 
+      }
+    }
+    
  
 }
 

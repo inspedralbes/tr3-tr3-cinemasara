@@ -6,7 +6,6 @@
 
 
 <script>
-    import { useStore } from "../stores/index";
 
     export default {
         props: {
