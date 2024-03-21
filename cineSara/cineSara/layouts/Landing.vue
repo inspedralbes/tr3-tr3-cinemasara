@@ -3,7 +3,7 @@
     <h1>PELÍCULAS</h1>
     <div v-if="peliculas.length" class="pelicula-container">
       <div v-for="pelicula in peliculas" :key="pelicula.id_pelicula" class="pelicula" >
-        <nuxt-link :to="{ name: 'entradas-id_pelicula', params: { id_pelicula: pelicula.id_pelicula}}" class="nav-link" >
+        <nuxt-link :to="{ name: 'entradas-id_pelicula', params: { id_pelicula: pelicula.id_pelicula}}" class="nav-link" @click=selectPelicula(pelicula)>
           <fichaPelicula :pelicula="pelicula"/>
         </nuxt-link>
       </div>   
@@ -50,19 +50,18 @@ export default {
     getPeliculas().then((response) => {
       //pelicula : titol, descriocio, cartell, duracio, any, director, id_pelicula
       this.peliculas = response;
-      return pelicula;
     }).catch((error) => {
       console.log(error);
     });
   },
-  
-    // selectPelicula(pelicula){
-    //   useStore().setPeliculaId(pelicula.id_pelicula);
-    //   this.$router.push({
-    //     path: `/entradas/${pelicula.id_pelicula}`,
-        
-    //   });
-    // }
+  methods: {
+    selectPelicula(pelicula){
+      
+      const store = useStore();
+      store.setPeliculaId(pelicula);
+      this.$router.push({ name: 'entradas-id_pelicula', params: { id_pelicula: pelicula.id_pelicula } });
+    }
+  }
   
 }
 </script>

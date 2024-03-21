@@ -1,8 +1,8 @@
 <template>
     <div>
         <h1>Sesion</h1>
-        <button @click="console.log(this.pelicula)">A</button>
-            <fichaPelicula :pelicula="{pelicula}"/>
+        <button @click="console.log(pelicula)">A</button>
+            <fichaPelicula :pelicula="pelicula"/>
 
 
         <h1>Pati Butacas</h1>
@@ -19,6 +19,12 @@ import { useStore } from "../stores/index";
             required: true
         }
     },
+    computed: {
+        pelicula(){
+            const store = useStore();
+            return store.selectPelicula;
+        }
+    }
  
 }
 
