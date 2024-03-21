@@ -10,4 +10,5 @@ class Sesion extends Model
     use HasFactory;
 
     protected $table = 'sesion';
+
 }

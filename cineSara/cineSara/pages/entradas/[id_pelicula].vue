@@ -2,31 +2,15 @@
     <div>
         <h1>Sesion</h1>
             <fichaPelicula :pelicula="pelicula"/>
-            <div v-if="sesionPelicula().length" class="sesion-container">
-                <div v-for="sesion in sesionPelicula()" :key="sesion.id_sesion" class="sesion">
-                    <p>{{ sesion.dia }}</p>
-                    <p>{{ sesion.hora }}</p>
-                    
-                </div>
-
-        </div>
-
+            <ficheroSesiones :sesiones="sesiones" :pelicula="pelicula"/>
         <h1>Pati Butacas</h1>
     </div>
 </template>
 
 <script>
 import { useStore } from "../stores/index";
-import { getSesion } from "~/services/communicationManager";   
 
     export default {
-        mounted(){
-            getSesion().then((response) => {
-                this.sesiones = response;
-            }).catch((error) => {
-                console.log(error);
-            });  
-        },
         props: {
         pelicula: {
             type: Object,
@@ -40,13 +24,20 @@ import { getSesion } from "~/services/communicationManager";
         }
     },
     methods: {
-        sesionPelicula(){
-            if(this.sesiones.length){
-                return this.sesiones.filter(sesion => sesion.id_pelicula === this.pelicula.id_pelicula)
-            }
+       async getSesion(){
+            try{
+                const response = await fetch(`http://localhost:8000/api/sesiones/${this.id_pelicula}`)
+                
+                if(!response.ok){
+                    throw new Error(data.message);
+                }                
+                const data = await response.json();
+                this.sesion = data;
+            }catch(error){
+                console.log(error);
+            }    
         }
-    
-    }
+    },
  
 }
 
