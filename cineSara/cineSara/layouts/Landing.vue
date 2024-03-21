@@ -28,12 +28,6 @@
   gap: 20px;
 }
 
-.pelicula {
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 </style>
 
 <script>

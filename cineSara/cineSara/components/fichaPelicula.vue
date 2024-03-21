@@ -16,30 +16,42 @@
 </template>
 
 <style scoped>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
+.pelicula-container {
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
 
 .pelicula-titol {
-  font-size: 1.5rem;
+  font-size: 24px;
   margin-bottom: 10px;
 }
 
 .pelicula-cartell {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 5px;
 }
 
-.pelicula-director,
-.pelicula-any,
-.sesiones {
-  margin-bottom: 5px;
-  font-size: 0.9rem;
+.pelicula-director, .pelicula-any {
+  font-size: 16px;
+  margin-bottom: 8px;
 }
 
 .pelicula-descripcion {
-  font-size: 1rem;
+  font-size: 18px;
+  line-height: 1.5;
 }
-
 </style>
 
 <script>
