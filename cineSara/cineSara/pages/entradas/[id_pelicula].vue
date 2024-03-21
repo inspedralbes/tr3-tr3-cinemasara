@@ -2,20 +2,28 @@
     <div>
         <h1>Sesion</h1>
             <fichaPelicula :pelicula="pelicula"/>
-            <ficheroSesiones :sesiones="sesiones" :pelicula="pelicula"/>
+            
         <h1>Pati Butacas</h1>
     </div>
 </template>
 
 <script>
 import { useStore } from "../stores/index";
-
+import fichaPelicula from "../components/fichaPelicula.vue";
+import ficheroSesiones from "../components/ficheroSesiones.vue";
     export default {
+        components: {
+            fichaPelicula,
+            ficheroSesiones
+        },
         props: {
         pelicula: {
             type: Object,
             required: true
         }
+    },
+    mounted() {
+        this.getSesion();
     },
     computed: {
         pelicula(){
@@ -26,7 +34,7 @@ import { useStore } from "../stores/index";
     methods: {
        async getSesion(){
             try{
-                const response = await fetch(`http://localhost:8000/api/sesiones/${this.id_pelicula}`)
+                const response = await fetch(`http://localhost:8000/api/sesiones/${this.$route.params.id_pelicula}`)
                 
                 if(!response.ok){
                     throw new Error(data.message);
@@ -38,7 +46,6 @@ import { useStore } from "../stores/index";
             }    
         }
     },
- 
 }
 
 

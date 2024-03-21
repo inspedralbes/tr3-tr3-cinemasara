@@ -1,6 +1,6 @@
 <template>
-    <div v-if="sesione" >
-        <p>{{ sesione.hora }}</p>
+    <div v-if="sesion" >
+        <p>{{ sesion.hora }}</p>
     </div>
 </template>
 
@@ -10,7 +10,7 @@
 
     export default {
         props: {
-            sesione: {
+            sesion: {
                 type: Object,
                 required: true
             },

@@ -9,7 +9,6 @@
                     <p class="pelicula-director">Director: {{ pelicula.director }}</p>
                     <p class="pelicula-any">Any: {{ pelicula.any }}</p>
                     <p class="pelicula-descripcion">{{ pelicula.descripcio }}</p>
-
             </div>
         </div>    
     </div>
@@ -61,10 +60,32 @@ export default {
         pelicula: {
             type: Object,
             required: true
+        },
+        sesion: {
+            type: Array,
+            required: true
         }
     },
+    mounted() {
+        this.getSesion();
+    },
     
-    
+    methods: {
+       async getSesion(){
+            try{
+                const response = await fetch(`http://localhost:8000/api/sesiones/${this.$route.params.id_pelicula}`)
+                
+                if(!response.ok){
+                    throw new Error(data.message);
+                }                
+                const data = await response.json();
+                this.sesion = data;
+            }catch(error){
+              console.error("Error al obtener la sesión:", error);
+            }    
+        }
+    },
+ 
  
 }
 
