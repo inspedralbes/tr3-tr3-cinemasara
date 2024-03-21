@@ -35,7 +35,7 @@ Route::get('/sesiones/{id_sesion}', function ($id_sesion){
         ->select('sesion.*', 'peliculas.titol')
         ->where('id_sesion', $id_sesion)
         ->first();
-        if($sesion){
+        if(!$sesion){
             return response()->json(['error' => 'Sesión no encontrada'],404);
         }
         return response()->json($sesion);
