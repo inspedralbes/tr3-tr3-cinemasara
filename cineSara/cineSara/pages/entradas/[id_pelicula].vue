@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Sesion</h1>
-            <fichaPelicula :pelicula="pelicula"/>
+            <fichaPelicula :pelicula="pelicula" :sesion="sesion"/>
             
         <h1>Pati Butacas</h1>
     </div>
@@ -22,6 +22,11 @@ import ficheroSesiones from "../components/ficheroSesiones.vue";
             required: true
         }
     },
+    data() {
+        return {
+            sesion: null
+        }
+    },
     mounted() {
         this.getSesion();
     },
@@ -34,13 +39,15 @@ import ficheroSesiones from "../components/ficheroSesiones.vue";
     methods: {
        async getSesion(){
             try{
+              
                 const response = await fetch(`http://localhost:8000/api/sesiones/${this.$route.params.id_pelicula}`)
-                
+                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", this.$route.params.id_pelicula); 
                 if(!response.ok){
                     throw new Error(data.message);
                 }                
                 const data = await response.json();
                 this.sesion = data;
+                console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",this.sesion);
             }catch(error){
                 console.log(error);
             }    
