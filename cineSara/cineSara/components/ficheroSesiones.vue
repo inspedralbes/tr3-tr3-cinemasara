@@ -1,7 +1,6 @@
 <template>
     <div v-if="sesion" >
         <p>{{ sesion.hora }}</p>
-        <button @click="sesion">a</button>
     </div>
 </template>
 
