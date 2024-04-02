@@ -2,7 +2,7 @@
     <div>
         <h1>Sesion</h1>
             <fichaPelicula :pelicula="pelicula" :sesion="sesion"/>
-            
+            <patioButacas class="butacas"/>
         <h1>Pati Butacas</h1>
     </div>
 </template>
@@ -11,10 +11,13 @@
 import { useStore } from "../stores/index";
 import fichaPelicula from "../components/fichaPelicula.vue";
 import ficheroSesiones from "../components/ficheroSesiones.vue";
+import patioButacas from "../components/patioButacas.vue";
     export default {
         components: {
             fichaPelicula,
-            ficheroSesiones
+            ficheroSesiones,
+            patioButacas
+            
         },
         props: {
         pelicula: {
@@ -34,6 +37,9 @@ import ficheroSesiones from "../components/ficheroSesiones.vue";
         pelicula(){
             const store = useStore();
             return store.selectPelicula;
+        },
+        comprarEntrada(){
+
         }
     },
     methods: {
@@ -41,13 +47,11 @@ import ficheroSesiones from "../components/ficheroSesiones.vue";
             try{
               
                 const response = await fetch(`http://localhost:8000/api/sesiones/${this.$route.params.id_pelicula}`)
-                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", this.$route.params.id_pelicula); 
                 if(!response.ok){
                     throw new Error(data.message);
                 }                
                 const data = await response.json();
                 this.sesion = data;
-                console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",this.sesion);
             }catch(error){
                 console.log(error);
             }    
