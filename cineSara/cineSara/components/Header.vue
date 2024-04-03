@@ -4,12 +4,7 @@
         <div class="container">
             <h1>CineSaras</h1>
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <router-link to="/peliculas" class="nav-link">Peliculas</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/cartelera" class="nav-link">Sesines</router-link>
-            </li>
+
           </ul>
         </div>
       </nav>

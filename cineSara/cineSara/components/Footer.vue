@@ -11,9 +11,6 @@
           <div class="footer-section">
             <h3>Enlaces rápidos</h3>
             <ul>
-              <li><router-link to="/">Inicio</router-link></li>
-              <li><router-link to="/peliculas">Peliculas</router-link></li>
-              <li><router-link to="/cartelera">Cartelera</router-link></li>
               <!-- Agrega más enlaces según sea necesario -->
             </ul>
           </div>

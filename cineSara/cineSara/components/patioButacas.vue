@@ -101,11 +101,4 @@
     width: 50px;
   }
   
-  .asiento.vip {
-    border: 2px solid gold;
-  }
-  
-  .asiento.ocupado {
-    border: 2px solid red;
-  }
   </style>

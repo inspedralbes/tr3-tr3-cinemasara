@@ -2,8 +2,8 @@
     <div>
         <h1>Sesion</h1>
             <fichaPelicula :pelicula="pelicula" :sesion="sesion"/>
-            <patioButacas class="butacas"/>
         <h1>Pati Butacas</h1>
+            <patioButacas class="butacas"/>
     </div>
 </template>
 
@@ -27,10 +27,10 @@ import patioButacas from "../components/patioButacas.vue";
     },
     data() {
         return {
-            sesion: null
+            sesion: {},
         }
     },
-    mounted() {
+    async mounted() {
         this.getSesion();
     },
     computed: {
