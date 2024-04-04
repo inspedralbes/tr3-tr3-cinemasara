@@ -24,7 +24,8 @@ class EntradasControllers extends Controller
         
         $data = $request->validate([
             'id_sesion' => 'required',
-            'id_butaca' => 'required',
+            'fila' => 'required',
+            'columna' => 'required',
             'preu' => 'required',
         ]);
         $entrada = Entradas::create($data);

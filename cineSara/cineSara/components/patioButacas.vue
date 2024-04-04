@@ -1,104 +1,151 @@
 <template>
-    <div class="patio-butacas">
-      <div v-for="fila in 7" :key="fila" class="fila">
-        <div v-for="(asiento, index) in butacas[fila - 1]" :key="`fila-${fila}-asiento-${index + 1}`" class="asiento"
-             :class="{ vip: asiento.vip, ocupado: asiento.ocupado }" @click="toggleAsiento(asiento)">
-          <img :src="getButacaImage(asiento)" :alt="'Asiento ' + (asiento.vip ? 'VIP' : 'Normal')" />
-        </div>
-      </div>
-      <div class="container-pasarelaCompra" v-if="mostrarPasarela">
-        <h2>Detalles de la Compra</h2>
-        <p>Total: {{ total }}€</p>
-        <button @click="comprarEntradas">Comprar</button>
+  <div class="patio-butacas">
+    <div v-for="fila in 7" :key="fila" class="fila">
+      <div v-for="(asiento, index) in butacas[fila - 1]" :key="`fila-${fila}-asiento-${index + 1}`" class="asiento"
+        :class="{ vip: asiento.vip, ocupado: asiento.ocupado }" @click="toggleAsiento(asiento)">
+        <img :src="getButacaImage(asiento)" :alt="'Asiento ' + (asiento.vip ? 'VIP' : 'Normal')" />
       </div>
     </div>
-   
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        butacas: [],
-        seleccionados: [],
-        mostrarPasarela: false,
-      };
-    },
-    mounted() {
-      this.inicializarButacas();
-    },
-    methods: {
-      inicializarButacas() {
-        for (let fila = 1; fila <= 7; fila++) {
-          let filaButacas = [];
-          for (let asiento = 1; asiento <= 10; asiento++) {
-            let vip = false; 
+    <div class="container-pasarelaCompra" v-if="mostrarPasarela">
+      <h2>Detalles de la Compra</h2>
+      <p>Total: {{ total }}€</p>
+      <button @click="comprarEntradas">Comprar</button>
+    </div>
+  </div>
 
-            if (fila === 4) {
-              vip = true;
-            }
-            filaButacas.push({
-              vip: vip,
-              ocupado: false,
-              fila: fila,
-              columna: asiento,
-            });
-          }
-          this.butacas.push(filaButacas);
-        }
-      },
-      actualizarSeleccionados() {
-        this.seleccionados = [];
-        this.butacas.forEach(fila => {
-          fila.forEach(asiento => {
-            if (asiento.ocupado) {
-              this.seleccionados.push(asiento);
-            }
-          });
-        });
-        this.mostrarPasarela = this.seleccionados.length > 0;
-      },
-      toggleAsiento(asiento) {
-        asiento.ocupado = !asiento.ocupado;
-        this.actualizarSeleccionados();
-      },
-      getButacaImage(asiento) {
-        if (asiento.vip) {
-          return asiento.ocupado ? '/butacas/butaca-vip-ocupada.jpg' : '/butacas/butaca-vip-libre.jpg';
-        } else {
-          return asiento.ocupado ? '/butacas/butaca-normal-ocupada.jpg' : '/butacas/butaca-normal-libre.jpg';
-        }
-      },
+</template>
+
+<script>
+
+export default {
+  props: {
+    pelicula: {
+      type: Object,
+      required: true,
     },
-    computed: {
-      total(){
-        let total = 0;
-        this.seleccionados.forEach(asiento => {
-          total += asiento.vip ? 8 : 6;
-        });
-        return total;
+    sesion: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      butacas: [],
+      seleccionados: [],
+      mostrarPasarela: false,
+      ocupacioButaca: [],
+
+    };
+  },
+  mounted() {
+    this.inicializarButacas();
+  },
+  methods: {
+    inicializarButacas() {
+      for (let fila = 1; fila <= 7; fila++) {
+        let filaButacas = [];
+        for (let asiento = 1; asiento <= 10; asiento++) {
+          let vip = false;
+
+          if (fila === 4) {
+            vip = true;
+          }
+          filaButacas.push({
+            vip: vip,
+            ocupado: false,
+            fila: fila,
+            columna: asiento,
+          });
+        }
+        this.butacas.push(filaButacas);
+
       }
+    },
+    comprarEntradas() {
+      const asientosSelecionado = this.butacas.flatMap(fila => fila.filter(asiento => asiento.ocupado));
+
+      if (asientosSelecionado.length === 10) {
+        let entrada = [];
+
+        entrada = {
+          id_sesion: this.sesion.id_sesion,
+          fila: asiento.fila,
+          columna: asiento.columna,
+          precio: asiento.vip ? 8 : 6,
+        };
+        return new Promise((resolve, reject) => {
+          fetch('http://localhost:8000/api/entradas', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({entradas}),
+          }).then((response) => {
+            if (response.status == 200) {
+              return response.json();
+            } else {
+              reject('Error al comprar las entradas');
+            }
+          }).then((data) => {
+            resolve(data);
+          }).catch((error) => {
+            reject(error);
+          });
+        })
+      }
+
+    },
+    actualizarSeleccionados() {
+      this.seleccionados = [];
+      this.butacas.forEach(fila => {
+        fila.forEach(asiento => {
+          if (asiento.ocupado) {
+            this.seleccionados.push(asiento);
+          }
+        });
+      });
+      this.mostrarPasarela = this.seleccionados.length > 0;
+    },
+    toggleAsiento(asiento) {
+      asiento.ocupado = !asiento.ocupado;
+      this.actualizarSeleccionados();
+    },
+    getButacaImage(asiento) {
+      if (asiento.vip) {
+        return asiento.ocupado ? '/butacas/butaca-vip-ocupada.jpg' : '/butacas/butaca-vip-libre.jpg';
+      } else {
+        return asiento.ocupado ? '/butacas/butaca-normal-ocupada.jpg' : '/butacas/butaca-normal-libre.jpg';
+      }
+    },
+  },
+  computed: {
+    total() {
+      let total = 0;
+      this.seleccionados.forEach(asiento => {
+        total += asiento.vip ? 8 : 6;
+      });
+      return total;
     }
-  };
-  </script>
-  
-  <style scoped>
-  .patio-butacas {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
-  
-  .fila {
-    display: flex;
-  }
-  
-  .asiento {
-    margin: 5px;
-  }
-  
-  .asiento img {
-    width: 50px;
-  }
-  
-  </style>
+};
+</script>
+
+<style scoped>
+.patio-butacas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fila {
+  display: flex;
+}
+
+.asiento {
+  margin: 5px;
+}
+
+.asiento img {
+  width: 50px;
+}
+</style>
