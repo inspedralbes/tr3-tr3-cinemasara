@@ -23,7 +23,11 @@ import patioButacas from "../components/patioButacas.vue";
         pelicula: {
             type: Object,
             required: true
+        }, id_pelicula: {
+            type: Number,
+            required: true
         }
+
     },
     data() {
         return {
