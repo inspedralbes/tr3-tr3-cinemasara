@@ -9,56 +9,40 @@
 
 <script>
 import { useStore } from "../stores/index";
-import fichaPelicula from "../components/fichaPelicula.vue";
-import ficheroSesiones from "../components/ficheroSesiones.vue";
-import patioButacas from "../components/patioButacas.vue";
+import ficheroSesiones from "@/components/ficheroSesiones.vue";
+import patioButacas from "@/components/patioButacas.vue";
     export default {
         components: {
-            fichaPelicula,
             ficheroSesiones,
             patioButacas
             
         },
-        props: {
-        pelicula: {
-            type: Object,
-            required: true
-        }, id_pelicula: {
-            type: Number,
-            required: true
-        }
-
-    },
     data() {
         return {
-            sesion: {},
-        }
+            sesion: [],
+        };
     },
-    async mounted() {
+    mounted() {
         this.getSesion();
+    },
+    methods: {
+       async getSesion(){
+            try{
+                const response = await fetch(`http://localhost:8000/api/sesiones/${this.$route.params.id_pelicula}`)
+                if(!response.ok){
+                    throw new Error("No se pudo obtener la sesión");
+                }                
+                const data = await response.json();
+                this.sesion = data;
+            }catch(error){
+                console.error("Error al obtener la sesión:", error);
+            }    
+        }
     },
     computed: {
         pelicula(){
             const store = useStore();
             return store.selectPelicula;
-        },
-        comprarEntrada(){
-
-        }
-    },
-    methods: {
-       async getSesion(){
-            try{
-              
-                const response = await fetch(`http://localhost:8000/api/sesiones/${this.$route.params.id_pelicula}`)
-                if(!response.ok){
-                    throw new Error(data.message);
-                }                
-                const data = await response.json();
-                this.sesion = data;
-            }catch(error){
-                console.log(error);
-            }    
         }
     },
 }
