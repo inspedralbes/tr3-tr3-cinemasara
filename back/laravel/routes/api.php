@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PeliculasController;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\EntradasControllers;
 use App\Models\Sesion;
 
 /*
@@ -41,4 +42,6 @@ Route::get('/sesiones/{id_sesion}', function ($id_sesion){
         return response()->json($sesion);
     
 });
+Route::get('/entradas', [EntradasControllers::class, 'index']);
+Route::post('/entradas', [EntradasControllers::class, 'store']);
 
