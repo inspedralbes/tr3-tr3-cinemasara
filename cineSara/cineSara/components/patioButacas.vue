@@ -18,23 +18,12 @@
 <script>
 
 export default {
-  props: {
-    pelicula: {
-      type: Object,
-      required: true,
-    },
-    sesion: {
-      type: Object,
-      required: true,
-    },
-  },
   data() {
     return {
       butacas: [],
       seleccionados: [],
       mostrarPasarela: false,
       ocupacioButaca: [],
-
     };
   },
   mounted() {
@@ -47,7 +36,7 @@ export default {
         for (let asiento = 1; asiento <= 10; asiento++) {
           let vip = false;
 
-          if (fila === 4) {
+          if (fila == 4) {
             vip = true;
           }
           filaButacas.push({
@@ -58,13 +47,12 @@ export default {
           });
         }
         this.butacas.push(filaButacas);
-
       }
     },
     comprarEntradas() {
       const asientosSelecionado = this.butacas.flatMap(fila => fila.filter(asiento => asiento.ocupado));
 
-      if (asientosSelecionado.length === 10) {
+      if (asientosSelecionado.length == 10) {
         let entrada = [];
 
         entrada = {
@@ -79,7 +67,7 @@ export default {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({entradas}),
+            body: JSON.stringify({entrada}),
           }).then((response) => {
             if (response.status == 200) {
               return response.json();

@@ -4,8 +4,8 @@
     <div v-if="peliculas.length" class="pelicula-container">
       <div v-for="pelicula in peliculas" :key="pelicula.id_pelicula" class="pelicula" >
         <nuxt-link :to="{ name: 'entradas-id_pelicula', params: { id_pelicula: pelicula.id_pelicula}}" 
-            class="nav-link" @click="selectPelicula(pelicula)">
-          <fichaPelicula  :pelicula="pelicula" :sesion="obtenerSesion(pelicula.id_pelicula)"/>
+          class="nav-link">
+          <fichaPelicula  :pelicula="pelicula" @click=selectPelicula(pelicula) />
         </nuxt-link>
       </div>   
     </div>
@@ -33,7 +33,7 @@
 
 <script>
 import { useStore } from '../stores/index';
-import {getPeliculas} from '../services/communicationManager.js';
+import { getPeliculas } from '../services/communicationManager.js';
 
 export default {
   data() {
@@ -42,35 +42,21 @@ export default {
     }
   },
   mounted() {
+    const store = useStore();
     getPeliculas().then((response) => {
       //pelicula : titol, descriocio, cartell, duracio, any, director, id_pelicula
       this.peliculas = response;
+      store.setTodasPeliculas(response);
     }).catch((error) => {
       console.log(error);
     });
-
   },
   methods: {
-     selectPelicula(pelicula){
-      
+    selectPelicula(pelicula){
       const store = useStore();
-      store.setPeliculaId(pelicula);
-    },
-    
-    async obtenerSesion(idPelicula){
-      try {
-        const response = await fetch(`http://localhost:8000/api/sesiones/${idPelicula}`);
-        if(!response.ok){
-          throw new Error('Error al obtener las sesiones');
-        }
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        console.log(error);
-        return null;
-      }
+      store.setIdPelicula(pelicula.id_pelicula);
+      store.setSelectPelicula(pelicula);
     }
-  }
-  
+  }  
 }
 </script>

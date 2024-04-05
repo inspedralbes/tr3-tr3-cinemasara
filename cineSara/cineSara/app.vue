@@ -1,10 +1,10 @@
 <template>
   <div>
-    <Header />
-    <NuxtPage :name="index" />
-    <Footer />
+    <NuxtLayout name="header" />
+    <NuxtPage />
+    <NuxtLayout name="footer" />
   </div>
 </template>
-<script>
 
+<script setup>
 </script>
