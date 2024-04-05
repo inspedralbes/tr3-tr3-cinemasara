@@ -52,34 +52,40 @@ export default {
     comprarEntradas() {
       const asientosSelecionado = this.butacas.flatMap(fila => fila.filter(asiento => asiento.ocupado));
 
-      if (asientosSelecionado.length == 10) {
+      if (asientosSelecionado.length <= 10 && asientosSelecionado.length > 0) {
         let entrada = [];
 
-        entrada = {
-          id_sesion: this.sesion.id_sesion,
-          fila: asiento.fila,
-          columna: asiento.columna,
-          precio: asiento.vip ? 8 : 6,
-        };
+        for (let i = 0; i < asientosSelecionado.length; i++) {
+          entrada.push({
+            id_sesion: this.$route.params.id_pelicula,
+            fila: asientosSelecionado[i].fila,
+            columna: asientosSelecionado[i].columna,
+            preu: asientosSelecionado[i].vip ? 8 : 6,
+          });
+        }
         return new Promise((resolve, reject) => {
           fetch('http://localhost:8000/api/entradas', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({entrada}),
-          }).then((response) => {
-            if (response.status == 200) {
+            body: JSON.stringify(entrada),
+          }).then(response => {
+            if (response.status == 201) {
+              console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
               return response.json();
             } else {
               reject('Error al comprar las entradas');
             }
-          }).then((data) => {
+          }).then(data => {
+            JSON.stringify(data);
             resolve(data);
-          }).catch((error) => {
+          }).catch(error => {
+            console.error('Error:', error);
             reject(error);
+          
           });
-        })
+        });
       }
 
     },

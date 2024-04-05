@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entradas;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class EntradasControllers extends Controller
@@ -13,7 +14,7 @@ class EntradasControllers extends Controller
     }
 
     public function show($id_entrada){
-        $entradas = Entradas::all()->where('id_entrada', $id_entrada)->first();
+        $entradas = Entradas::all()->where('id_entradas', $id_entrada)->first();
         if(!$entradas){
             return response()->json(['error' => 'Entrada no encontrada'],404);
         }
@@ -21,14 +22,23 @@ class EntradasControllers extends Controller
     }
 
     public function store(Request $request){
+        $data = $request->json()->all();
         
-        $data = $request->validate([
-            'id_sesion' => 'required',
-            'fila' => 'required',
-            'columna' => 'required',
-            'preu' => 'required',
-        ]);
-        $entrada = Entradas::create($data);
+        for ($i=0; $i <count($data); $i++) { 
+            $validator = Validator::make($data[$i],[
+                'id_sesion' => 'required|exists:sesion,id_sesion',
+                'fila' => 'required|integer',
+                'columna' => 'required|integer',
+                'preu' => 'required|numeric',
+            ]);
+            if($validator->fails()){
+                return response()->json($validator->errors(),400);
+            }
+        }
+        for($i=0; $i<count($data); $i++){
+            $entrada = Entradas::create($data[$i]);
+        }
+
         return response()->json($entrada, 201);
     }
 

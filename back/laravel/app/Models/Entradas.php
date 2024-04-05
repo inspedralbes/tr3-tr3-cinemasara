@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Entradas extends Model
 {
     use HasFactory;
-   protected $filable = ['id_sesion', 'fila', 'columna', 'preu'];
+protected $fillable = ['id_sesion', 'fila', 'columna', 'preu'];
 }
