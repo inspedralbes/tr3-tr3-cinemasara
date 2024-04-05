@@ -2,7 +2,7 @@
   <div class="patio-butacas">
     <div v-for="fila in 7" :key="fila" class="fila">
       <div v-for="(asiento, index) in butacas[fila - 1]" :key="`fila-${fila}-asiento-${index + 1}`" class="asiento"
-        :class="{ vip: asiento.vip, ocupado: asiento.ocupado }" @click="toggleAsiento(asiento)">
+        :class="{ vip: asiento.vip, ocupacioButaca: asiento.ocupacioButaca }" @click="toggleAsiento(asiento)">
         <img :src="getButacaImage(asiento)" :alt="'Asiento ' + (asiento.vip ? 'VIP' : 'Normal')" />
       </div>
     </div>
@@ -28,6 +28,7 @@ export default {
   },
   mounted() {
     this.inicializarButacas();
+    this.actualizarOcupacionButaca();
   },
   methods: {
     inicializarButacas() {
@@ -41,7 +42,7 @@ export default {
           }
           filaButacas.push({
             vip: vip,
-            ocupado: false,
+            ocupacioButaca: false,
             fila: fila,
             columna: asiento,
           });
@@ -49,8 +50,30 @@ export default {
         this.butacas.push(filaButacas);
       }
     },
+    async actualizarOcupacionButaca(){
+      try{
+        const response = await fetch('http://localhost:8000/api/entradas');
+        const data = await response.json();
+        this.actuazarButacas(data);
+      }catch(error){
+        console.error('Error:', error);
+      }
+    },
+
+    async actuazarButacas(entradas){
+      const idSesionActual = this.$route.params.id_pelicula;
+      entradas.forEach(entrada => {
+        if(entrada.id_sesion == idSesionActual){
+          const fila = entrada.fila -1;
+          const columna = entrada.columna -1;
+          if(fila >= 0 && fila < this.butacas.length && columna >= 0 && columna < this.butacas[fila].length){
+            this.butacas[fila][columna].ocupacioButaca = true;
+          }
+        }
+      })
+    },
     comprarEntradas() {
-      const asientosSelecionado = this.butacas.flatMap(fila => fila.filter(asiento => asiento.ocupado));
+      const asientosSelecionado = this.butacas.flatMap(fila => fila.filter(asiento => asiento.ocupacioButaca));
 
       if (asientosSelecionado.length <= 10 && asientosSelecionado.length > 0) {
         let entrada = [];
@@ -86,6 +109,8 @@ export default {
           
           });
         });
+      }else{
+        alert('No puedes comprar mas de 10 entradas');
       }
 
     },
@@ -93,7 +118,7 @@ export default {
       this.seleccionados = [];
       this.butacas.forEach(fila => {
         fila.forEach(asiento => {
-          if (asiento.ocupado) {
+          if (asiento.ocupacioButaca) {
             this.seleccionados.push(asiento);
           }
         });
@@ -101,14 +126,14 @@ export default {
       this.mostrarPasarela = this.seleccionados.length > 0;
     },
     toggleAsiento(asiento) {
-      asiento.ocupado = !asiento.ocupado;
+      asiento.ocupacioButaca = !asiento.ocupacioButaca;
       this.actualizarSeleccionados();
     },
     getButacaImage(asiento) {
       if (asiento.vip) {
-        return asiento.ocupado ? '/butacas/butaca-vip-ocupada.jpg' : '/butacas/butaca-vip-libre.jpg';
+        return asiento.ocupacioButaca ? '/butacas/butaca-vip-ocupada.jpg' : '/butacas/butaca-vip-libre.jpg';
       } else {
-        return asiento.ocupado ? '/butacas/butaca-normal-ocupada.jpg' : '/butacas/butaca-normal-libre.jpg';
+        return asiento.ocupacioButaca ? '/butacas/butaca-normal-ocupada.jpg' : '/butacas/butaca-normal-libre.jpg';
       }
     },
   },
