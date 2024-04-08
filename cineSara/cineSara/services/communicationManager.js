@@ -1,3 +1,5 @@
+// const url = 'http://localhost:8000/api/';
+// const url = 'http://tr3.a21sarmarbau.daw.inspedralbes.cat/back/laravel/public/api/';
 const url = 'http://localhost:8000/api/';
 
 export function getPeliculas() {
