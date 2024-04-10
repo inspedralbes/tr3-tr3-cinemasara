@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <h1>PELÍCULAS</h1>
+    <h1 class="titol">PELÍCULAS</h1>
     <div v-if="peliculas.length" class="pelicula-container">
       <div v-for="pelicula in peliculas" :key="pelicula.id_pelicula" class="pelicula" >
         <nuxt-link :to="{ name: 'entradas-id_pelicula', params: { id_pelicula: pelicula.id_pelicula}}" 
-          class="nav-link">
+          class="nav-link custom-link">
           <fichaPelicula  :pelicula="pelicula" @click=selectPelicula(pelicula) />
         </nuxt-link>
       </div>   
@@ -19,7 +19,7 @@
   align-items: center;
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 14px;
   text-align: center;
 }
 
