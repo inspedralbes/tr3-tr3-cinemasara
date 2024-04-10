@@ -16,10 +16,10 @@ class Entrada extends Mailable
     /**
      * Create a new message instance.
      */
-    public $entrada;
-    public function __construct($entrada)
+    public $entradas;
+    public function __construct($entradas)
     {
-        $this->entrada = $entrada;
+        $this->entradas = $entradas;
     }
 
     /**
