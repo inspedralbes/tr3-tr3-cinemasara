@@ -7,9 +7,11 @@
       </div>
     </div>
     <div class="container-pasarelaCompra" v-if="mostrarPasarela">
-      <h2>Detalles de la Compra</h2>
-      <p>Total: {{ total }}€</p>
-      <button @click="comprarEntradas">Comprar</button>
+      <div class="container-compra">
+        <h2>Detalles de la Compra</h2>
+        <p>Total: {{ total }}€</p>
+        <button @click="comprarEntradas">Comprar</button>
+      </div>
     </div>
   </div>
 
@@ -180,5 +182,16 @@ export default {
 
 .asiento img {
   width: 50px;
+}
+.container-compra{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background-color: rgb(144, 144, 233);
+  width: 20vw;
+  height: 20vh;
+  border-radius: 10px;
 }
 </style>
