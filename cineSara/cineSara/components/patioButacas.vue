@@ -2,7 +2,7 @@
   <div class="patio-butacas">
     <div v-for="fila in 7" :key="fila" class="fila">
       <div v-for="(asiento, index) in butacas[fila - 1]" :key="`fila-${fila}-asiento-${index + 1}`" class="asiento"
-        :class="{ vip: asiento.vip, ocupacioButaca: asiento.ocupacioButaca }" @click="toggleAsiento(asiento)">
+        :class="{ vip: asiento.vip, ocupacio: asiento.ocupacio }" @click="toggleAsiento(asiento)">
         <img :src="getButacaImage(asiento)" :alt="'Asiento ' + (asiento.vip ? 'VIP' : 'Normal')" />
       </div>
     </div>
@@ -24,6 +24,7 @@ export default {
       seleccionados: [],
       mostrarPasarela: false,
       ocupacioButaca: [],
+      
     };
   },
   mounted() {
@@ -67,58 +68,57 @@ export default {
           const fila = entrada.fila -1;
           const columna = entrada.columna -1;
           if(fila >= 0 && fila < this.butacas.length && columna >= 0 && columna < this.butacas[fila].length){
-            this.butacas[fila][columna].ocupacioButaca = true;
+            this.butacas[fila][columna].ocupacio = true;
           }
         }
       })
     },
     comprarEntradas() {
-      const asientosSelecionado = this.butacas.flatMap(fila => fila.filter(asiento => asiento.ocupacioButaca));
 
-      if (asientosSelecionado.length <= 10 && asientosSelecionado.length > 0) {
-        let entrada = [];
+    let asientosDisponibles = this.ocupacioButaca.filter(asiento => !asiento.ocupacioButaca);
+      
+  if (asientosDisponibles.length <= 10 && asientosDisponibles.length > 0) {
+    let entrada = [];
 
-        for (let i = 0; i < asientosSelecionado.length; i++) {
-          entrada.push({
-            id_sesion: this.$route.params.id_pelicula,
-            fila: asientosSelecionado[i].fila,
-            columna: asientosSelecionado[i].columna,
-            preu: asientosSelecionado[i].vip ? 8 : 6,
-          });
+    for (let i = 0; i < asientosDisponibles.length; i++) {
+      entrada.push({
+        id_sesion: this.$route.params.id_pelicula,
+        fila: asientosDisponibles[i].fila,
+        columna: asientosDisponibles[i].columna,
+        preu: asientosDisponibles[i].vip ? 8 : 6,
+      });
+    }
+    console.log('Comprando entradas');
+    return new Promise((resolve, reject) => {
+      fetch('http://localhost:8000/api/entradas', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(entrada),
+      }).then(response => {
+        if (response.status == 201) {
+          console.log('Entradas compradas correctamente');
+          return response.json();
+        } else {
+          reject('Error al comprar las entradas');
         }
-        return new Promise((resolve, reject) => {
-          fetch('http://localhost:8000/api/entradas', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(entrada),
-          }).then(response => {
-            if (response.status == 201) {
-              console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-              return response.json();
-            } else {
-              reject('Error al comprar las entradas');
-            }
-          }).then(data => {
-            JSON.stringify(data);
-            resolve(data);
-          }).catch(error => {
-            console.error('Error:', error);
-            reject(error);
-          
-          });
-        });
-      }else{
-        alert('No puedes comprar mas de 10 entradas');
-      }
-
-    },
+      }).then(data => {
+        resolve(data);
+      }).catch(error => {
+        console.error('Error:', error);
+        reject(error);
+      });
+    });
+  } else {
+    alert('No puedes comprar más de 10 entradas o no hay asientos disponibles');
+  }
+},
     actualizarSeleccionados() {
       this.seleccionados = [];
       this.butacas.forEach(fila => {
         fila.forEach(asiento => {
-          if (asiento.ocupacioButaca) {
+          if (asiento.ocupacio) {
             this.seleccionados.push(asiento);
           }
         });
@@ -126,26 +126,40 @@ export default {
       this.mostrarPasarela = this.seleccionados.length > 0;
     },
     toggleAsiento(asiento) {
-      asiento.ocupacioButaca = !asiento.ocupacioButaca;
-      this.actualizarSeleccionados();
+      if(!asiento.ocupacio){
+        asiento.ocupacio= !asiento.ocupacio;
+        this.ocupacioButaca.push(asiento);
+        this.actualizarSeleccionados();
+      }else if(!this.ocupacioButaca.includes(asiento)) {
+        alert('Este asiento ya esta ocupado. Por favor, selecciona otro.')
+      }else {
+        asiento.ocupacio = !asiento.ocupacio;
+        const index = this.ocupacioButaca.indexOf(asiento);
+        if(index > -1){
+          this.ocupacioButaca.splice(index, 1);
+        }
+        this.actualizarSeleccionados();
+      }
     },
     getButacaImage(asiento) {
       if (asiento.vip) {
-        return asiento.ocupacioButaca ? '/butacas/butaca-vip-ocupada.jpg' : '/butacas/butaca-vip-libre.jpg';
+        return asiento.ocupacio ? '/butacas/butaca-vip-ocupada.jpg' : '/butacas/butaca-vip-libre.jpg';
       } else {
-        return asiento.ocupacioButaca ? '/butacas/butaca-normal-ocupada.jpg' : '/butacas/butaca-normal-libre.jpg';
+        return asiento.ocupacio ? '/butacas/butaca-normal-ocupada.jpg' : '/butacas/butaca-normal-libre.jpg';
       }
     },
   },
   computed: {
-    total() {
-      let total = 0;
-      this.seleccionados.forEach(asiento => {
-        total += asiento.vip ? 8 : 6;
-      });
-      return total;
-    }
+  total() {
+    let total = 0;
+    
+    this.ocupacioButaca.forEach(asiento => {
+      total += asiento.vip ? 8 : 6;
+    });
+    
+    return total;
   }
+}
 };
 </script>
 

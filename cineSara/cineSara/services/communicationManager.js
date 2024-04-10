@@ -55,3 +55,26 @@ export function getSesionesIdPelicula(id) {
             });
     });
 }
+
+export function comprarEntradas(entradas) {
+    return new Promise((resolve, reject) => {
+        fetch(`${url}entradas`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(entradas)
+        }).then(response => {
+            if (response.status == 201) {
+                return response.json();
+            } else {
+                reject('Error al comprar las entradas');
+            }
+        }).then(data => {
+            JSON.stringify(data);
+            resolve(data);
+        }).catch(error => {
+            reject(error);
+        });
+    });
+}
