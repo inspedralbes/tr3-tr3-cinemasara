@@ -22,7 +22,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Rutas de peliculas
 Route::get('/peliculas', [PeliculasController::class, 'getPeliculas']);
+Route::get('/peliculas/{id_pelicula}', [PeliculasController::class, 'show']);
+Route::post('/peliculas', [PeliculasController::class, 'store']);
+Route::put('/peliculas/{id_pelicula}', [PeliculasController::class, 'update']);
+Route::delete('/peliculas/{id}', [PeliculasController::class, 'destroy']);
+
 Route::get('/sesiones', function (){
     $sesiones = DB::table('sesion')
     ->join('peliculas', 'sesion.id_pelicula', '=', 'peliculas.id_pelicula')

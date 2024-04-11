@@ -2,10 +2,10 @@
     <header class="header">
       <nav class="navbar">
         <div class="container">
-            <h1>CineSaras</h1>
-          <ul class="navbar-nav">
-
-          </ul>
+            <router-link to="/" class="navbar-brand"><h1>CineSaras</h1></router-link>
+          <div>
+            <router-link to="/Login" class="nav-link">Login</router-link>
+          </div>
         </div>
       </nav>
     </header>
