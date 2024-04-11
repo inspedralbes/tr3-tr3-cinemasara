@@ -18,32 +18,57 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
 }
 
 .container h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 20px; 
+    margin-bottom: 15px; 
 }
 
 .content-wrapper {
     display: flex;
-    justify-content: left; /* Espaciado entre los elementos */
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    gap: 10%;
-
 }
 
+.container-pelicula,
+.container-butacas {
+    width: 90%; 
+    margin-bottom: 15px; 
+}
 
-
-
-/* Estilos específicos para el componente "patioButacas" */
 .container-butacas {
     background-color: #f2f2f2;
     border-radius: 10px;
-    padding: 20px;
+    padding: 15px; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+@media only screen and (min-width: 600px) {
+    .container {
+        padding: 20px; 
+    }
+
+    .container h1 {
+        font-size: 24px; 
+    }
+
+    .content-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .container-pelicula,
+    .container-butacas {
+        width: 45%;
+        margin-bottom: 0;
+    }
+}
+
+
 </style>
 
 

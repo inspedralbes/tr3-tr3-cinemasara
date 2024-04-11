@@ -176,12 +176,14 @@ export default {
 <style scoped>
 .patio-butacas {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  flex-wrap: wrap; 
 }
 
 .fila {
   display: flex;
+  justify-content: center; 
 }
 
 .asiento {
@@ -191,7 +193,8 @@ export default {
 .asiento img {
   width: 50px;
 }
-.container-compra{
+
+.container-compra {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -202,4 +205,24 @@ export default {
   height: 20vh;
   border-radius: 10px;
 }
+
+@media only screen and (max-width: 600px) {
+  .patio-butacas {
+    flex-direction: column; 
+    align-items: center; 
+  }
+
+  .asiento img {
+    width: 23px; 
+    
+  }
+
+  .container-compra {
+    width: 99%; 
+    max-width: 300px; 
+    height: 35%;
+  }
+}
+
+
 </style>

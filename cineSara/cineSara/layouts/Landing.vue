@@ -25,9 +25,22 @@
 
 .pelicula-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 20px;
 }
+
+@media only screen and (min-width: 600px) {
+  .pelicula-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .pelicula-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
 
 </style>
 

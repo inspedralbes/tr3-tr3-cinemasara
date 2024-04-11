@@ -22,7 +22,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 78vh;
+  height: auto;
+  padding: 20px;
 }
 
 .pelicula-container {
@@ -31,8 +32,8 @@
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
-  width: 20vw;
-  height: 70vh;
+  width: 50vh;
+  max-width: 400px;
 }
 
 .pelicula-titol {
@@ -41,30 +42,37 @@
 }
 
 .pelicula-cartell {
-  width: 15vw; /* Ancho al 100% del contenedor padre */
+  width: 100%;
   height: auto;
   border-radius: 5px;
-  height: 40vh;
+  max-height: 50vh;
 }
 
 .container-texto {
-  display: flex; /* Utilizamos flexbox para alinear elementos verticalmente */
-  flex-direction: column; /* Alinear elementos en columna */
-  justify-content: center; /* Centrar verticalmente */
-  align-items: center; /* Centrar horizontalmente */
-  margin-top: 20px; /* Espacio entre la imagen y el texto */
+  margin-top: 20px;
 }
 
 .texto {
-  width: 100%; /* Ancho al 100% del contenedor padre */
-  text-align: left; /* Alinear texto a la izquierda */
+  text-align: left;
 }
 
 .pelicula-director, .pelicula-any, .pelicula-descripcion {
   font-size: 16px;
   margin-bottom: 8px;
-  width: 100%; /* Ancho al 100% del contenedor padre */
 }
+
+@media only screen and (max-width: 600px) {
+  .pelicula-container {
+    width: 100%;
+    max-width: 100%; 
+  }
+
+  .pelicula-cartell {
+    max-height: 30vh;
+    max-width: 100%; 
+  }
+}
+
 </style>
 
 <script>
