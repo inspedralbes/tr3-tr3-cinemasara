@@ -79,19 +79,20 @@ export function comprarEntradas(entradas) {
     });
 }
 
-export function login(usuario) {
+//funcion para crear una pelicula
+export function crearPelicula(pelicula) {
     return new Promise((resolve, reject) => {
-        fetch(`${url}user`, {
+        fetch(`${url}peliculas`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(usuario)
+            body: JSON.stringify(pelicula)
         }).then(response => {
             if (response.status == 200) {
                 return response.json();
             } else {
-                reject('Error al hacer login');
+                reject('Error al crear la pelicula');
             }
         }).then(data => {
             JSON.stringify(data);
@@ -102,23 +103,44 @@ export function login(usuario) {
     });
 }
 
-export function registrar(usuario) {
+//funcion para actualizar una pelicula
+export function actualizarPelicula(id, pelicula) {
     return new Promise((resolve, reject) => {
-        fetch(`${url}user`, {
-            method: 'GET',
+        fetch(`${url}peliculas/${id}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(usuario)
+            body: JSON.stringify(pelicula)
         }).then(response => {
-            if (response.status == 201) {
+            if (response.status == 200) {
                 return response.json();
             } else {
-                reject('Error al registrar');
+                reject('Error al actualizar la pelicula');
             }
         }).then(data => {
             JSON.stringify(data);
             resolve(data);
+        }).catch(error => {
+            reject(error);
+        });
+    });
+}
+
+//funcion para borrar una pelicula
+export function borrarPelicula(id) {
+    return new Promise((resolve, reject) => {
+        fetch(`${url}peliculas/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.status == 200) {
+                resolve('Pelicula borrada');
+            } else {
+                reject('Error al borrar la pelicula');
+            }
         }).catch(error => {
             reject(error);
         });
