@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('fila');
             $table->string('columna');
             $table->string('preu');
+            $table->string('email');
             $table->timestamps();
 
             $table->foreign('id_sesion')->references('id_sesion')->on('sesion');

@@ -10,7 +10,7 @@
       <div class="container-compra">
         <h2>Detalles de la Compra</h2>
         <p>Total: {{ total }}€</p>
-        <button @click="comprarEntradas">Comprar</button>
+        <button @click="insertarCorreo">Comprar</button>
       </div>
     </div>
   </div>
@@ -26,7 +26,7 @@ export default {
       seleccionados: [],
       mostrarPasarela: false,
       ocupacioButaca: [],
-      
+      email: '',
     };
   },
   mounted() {
@@ -51,6 +51,13 @@ export default {
           });
         }
         this.butacas.push(filaButacas);
+      }
+    },
+    async insertarCorreo(){
+      const correo = prompt('Introduce tu correo electrónico');
+      if(correo){
+        this.email = correo;
+        await this.comprarEntradas();
       }
     },
     async actualizarOcupacionButaca(){
@@ -88,6 +95,7 @@ export default {
         fila: asientosDisponibles[i].fila,
         columna: asientosDisponibles[i].columna,
         preu: asientosDisponibles[i].vip ? 8 : 6,
+        email: this.email,
       });
     }
     console.log('Comprando entradas');

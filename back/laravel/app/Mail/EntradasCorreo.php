@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class Entrada extends Mailable
+class EntradasCorreo extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -17,6 +17,7 @@ class Entrada extends Mailable
      * Create a new message instance.
      */
     public $entradas;
+    
     public function __construct($entradas)
     {
         $this->entradas = $entradas;
@@ -38,7 +39,7 @@ class Entrada extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'entradas',
+            view: 'emailEntrada',
         );
     }
 
