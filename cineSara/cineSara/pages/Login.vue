@@ -82,7 +82,7 @@
                         throw new Error('Error en iniciar sessio');
                     }
                     console.log('Inici de sessio correcte');
-                    this.$router.push('/admin');
+                    this.$router.push('/Admin');
                     
             }catch(error){
                 console.error('Error:', error);

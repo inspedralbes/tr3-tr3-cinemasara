@@ -8,7 +8,7 @@
 <body>
 
     @foreach ($entradas as $entrada)
-        <p>Entrada para la sesion {{$entrada['id_sesion']}} con el asiento {{$entrada['fila']}}{{$entrada['columna']}} y un precio de {{$entrada['preu']}}€</p>
+        <p>Entrada para la sesion {{$entrada['id_sesion']}} con el asiento {{$entrada['fila']}}/{{$entrada['columna']}} y un precio de {{$entrada['preu']}}€</p>
     @endforeach
 </body>
 </html>

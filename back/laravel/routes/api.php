@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PeliculasController;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\EntradasControllers;
+use App\Http\Controllers\LoginController;
 use App\Models\Sesion;
 
 /*
@@ -21,7 +22,7 @@ use App\Models\Sesion;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::post('/login', [LoginController::class, 'login']);
 //Rutas de peliculas
 Route::get('/peliculas', [PeliculasController::class, 'getPeliculas']);
 Route::get('/peliculas/{id_pelicula}', [PeliculasController::class, 'show']);

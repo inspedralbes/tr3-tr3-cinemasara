@@ -8,27 +8,26 @@
             <form @submit.prevent="crearPelicula" class="form">
                 <div class="form-group">
                     <label for="titulo" class="form-label">Título:</label>
-                    <input type="text" id="titulo" v-model="peliculaNueva.titol" required class="form-input">
+                    <input type="text" id="titulo" v-model="nuevaPelicula.titul" required class="form-input">
                 </div>
 
                 <div class="form-group">
                     <label for="director" class="form-label">Director:</label>
-                    <input type="text" id="director" v-model="peliculaNueva.director" required class="form-input">
+                    <input type="text" id="director" v-model="nuevaPelicula.director" required class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="any" class="form-label">Any:</label>
+                    <input type="text" id="any" v-model="nuevaPelicula.any" required class="form-input">
                 </div>
 
                 <div class="form-group">
                     <label for="duracion" class="form-label">Duración (minutos):</label>
-                    <input type="number" id="duracion" v-model="peliculaNueva.duracio" required class="form-input">
+                    <input type="number" id="duracion" v-model="nuevaPelicula.duracio" required class="form-input">
                 </div>
 
-                <div class="form-group">
-                    <label for="portada" class="form-label">URL de la imagen:</label>
-                    <input type="text" id="portada" v-model="peliculaNueva.cartell" required class="form-input">
-                </div>
-                <div class="form-buttons">
-                    <label for="any" class="form-label">Any:</label>
-                    <input type="number" id="any" v-model="peliculaNueva.any" required class="form-input">
-                </div>
+
+
                 <button type="submit" class="form-button primary-button">Crear Película</button>
             </form>
         </div>
@@ -38,8 +37,7 @@
             <h2 class="list-heading">Listado de Películas</h2>
             <ul class="list">
                 <li v-for="pelicula in peliculas" :key="pelicula.id_pelicula" class="list-item">
-                    <img :src="pelicula.cartell" alt="Portada de la película" class="pelicula-portada">
-                    <span class="pelicula-titulo">{{ pelicula.titol }}</span>
+                    <span class="pelicula-titulo">{{ pelicula.titul }}</span>
                     <div class="list-buttons">
                         <button @click="editarPelicula(pelicula)" class="list-button edit-button">Editar</button>
                         <button @click="borrarPelicula(pelicula)" class="list-button delete-button">Eliminar</button>
@@ -54,17 +52,22 @@
             <form @submit.prevent="actualizarPelicula" class="form">
                 <div class="form-group">
                     <label for="titulo" class="form-label">Título:</label>
-                    <input type="text" id="titulo" v-model="peliculaEditar.titulo" required class="form-input">
+                    <input type="text" id="titulo" v-model="peliculaEditando.titul" required class="form-input">
                 </div>
 
                 <div class="form-group">
                     <label for="director" class="form-label">Director:</label>
-                    <input type="text" id="director" v-model="peliculaEditar.director" required class="form-input">
+                    <input type="text" id="director" v-model="peliculaEditando.director" required class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="any" class="form-label">Género:</label>
+                    <input type="text" id="any" v-model="peliculaEditando.any" required class="form-input">
                 </div>
 
                 <div class="form-group">
                     <label for="duracion" class="form-label">Duración (minutos):</label>
-                    <input type="number" id="duracion" v-model="peliculaEditar.duracion" required class="form-input">
+                    <input type="number" id="duracion" v-model="peliculaEditando.duracio" required class="form-input">
                 </div>
 
                 <div class="form-buttons">
@@ -76,67 +79,184 @@
     </div>
 </template>
 
-
 <script>
-import { getPeliculas, crearPelicula,  borrarPelicula, actualizarPelicula } from '../services/communicationManager'
+// Importa las funciones desde communicationManager.js
+import { getPeliculas, crearPelicula, actualizarPelicula, borrarPelicula } from '../services/communicationManager';
 
-    export default{
-        data(){
-            return{
-                peliculas: [],
-                pelicula: {
-                    peliculaNueva: {
-                        titol: '',
-                        director: '',
-                        any: '',
-                        duracio: null,
-                        cartell: '',
-                    },
-                    peliculaEditar: null,
-                }
-            }
-
-        },
-        async mounted(){
-            await this.getPeliculas();
-        },
-        methods: {
-            async getPeliculas(){
+export default {
+    data() {
+        return {
+            peliculas: [],
+            nuevaPelicula: {
+                titul: '',
+                director: '',
+                any: '',
+                duracio: null,
+            },
+            peliculaEditando: null,
+        };
+    },
+    async mounted() {
+        await this.getPeliculas();
+    },
+    methods: {
+        async getPeliculas() {
+            try {
                 this.peliculas = await getPeliculas();
-            },
-            async crearPelicula(){
-               try{
-                   await crearPelicula(this.pelicula.peliculaNueva);
-                   this.pelicula.peliculaNueva = {
-                       titol: '',
-                       director: '',
-                       any: '',
-                       duracio: null,
-                   }
-                   await this.getPeliculas();
-               } catch(error){
-                   console.log('Error al crear la película', error);
-               }
-            },
-            async borrarPelicula(pelicula){
-                try{
-                    await borrarPelicula(pelicula.id);
-                    await this.getPeliculas();
-                } catch(error){
-                    console.log('Error al eliminar la película', error);
-                }
-            },
-            async actualizarPelicula(){
-                try{
-                    await actualizarPelicula(this.pelicula.peliculaEditando);
-                    this.pelicula.peliculaEditar = null;
-                    await this.getPeliculas();
-                } catch(error){
-                    console.log('Error al editar la película', error);
-                }
+            } catch (error) {
+                console.error('Error al obtener las películas:', error);
             }
-        }
+        },
+        async crearPelicula() {
+            try {
+                await crearPelicula(this.nuevaPelicula);
+                this.nuevaPelicula = { titul: '', director: '', any: '', duracio: null };
+                await this.getPeliculas();
+            } catch (error) {
+                console.error('Error al crear la película:', error);
+            }
+        },
+        async editarPelicula(pelicula) {
+            this.peliculaEditando = { ...pelicula };
+        },
+        async actualizarPelicula() {
+            try {
+                if (this.selectedFile) {
+                    // Si se ha seleccionado un archivo, primero sube la imagen
+                    const imagenUrl = await this.subirImagen(this.selectedFile);
+                    this.peliculaEditando.portada = imagenUrl;
+                }
 
-    }
-
+                await actualizarPelicula(this.peliculaEditando.id_pelicula, this.peliculaEditando);
+                this.peliculaEditando = null;
+                await this.getPeliculas();
+            } catch (error) {
+                console.error('Error al actualizar la película:', error);
+            }
+        },
+        async borrarPelicula(pelicula) {
+            try {
+                await borrarPelicula(pelicula.id_pelicula);
+                await this.getPeliculas();
+            } catch (error) {
+                console.error('Error al eliminar la película:', error);
+            }
+        },
+        cancelarEdicion() {
+            this.peliculaEditando = null;
+        },
+    },
+};
 </script>
+
+<style scoped>
+.admin {
+    margin: 20px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.admin-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.crear-pelicula,
+.editar-pelicula {
+    margin-bottom: 20px;
+}
+
+.form-heading {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.form-label {
+    margin-bottom: 5px;
+    display: block;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-input {
+    margin-bottom: 10px;
+    padding: 8px;
+    width: calc(100% - 16px);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-button {
+    margin-top: 10px;
+    margin-right: 10px;
+    /* Separación entre botones */
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-button:hover {
+    background-color: #0056b3;
+}
+
+.primary-button {
+    background-color: #007bff;
+}
+
+.secondary-button {
+    background-color: #dc3545;
+}
+
+.secondary-button:hover {
+    background-color: #c82333;
+}
+
+.list-heading {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+}
+
+.list-item {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.list-buttons {
+    margin-left: auto;
+}
+
+.list-button {
+    padding: 5px 10px;
+    background-color: transparent;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.list-button:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.pelicula-portada {
+    width: 100px;
+    height: auto;
+    margin-right: 10px;
+}
+</style>
