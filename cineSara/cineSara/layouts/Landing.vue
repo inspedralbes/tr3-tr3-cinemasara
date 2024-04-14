@@ -13,6 +13,10 @@
 </template>
 
 <style scoped>
+* {
+  margin: 0;
+  padding: 0;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -28,7 +32,14 @@
   grid-template-columns: 1fr;
   gap: 20px;
 }
+.custom-link {
+  text-decoration: none;
+  color: inherit;
+}
+.titol{
 
+  font-size: 4rem;
+}
 @media only screen and (min-width: 600px) {
   .pelicula-container {
     grid-template-columns: 1fr 1fr;

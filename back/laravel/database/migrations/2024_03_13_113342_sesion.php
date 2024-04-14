@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sesion', function (Blueprint $table) {
             $table->id('id_sesion')->autoIncrement();
             $table->unsignedBigInteger('id_pelicula');
-            $table->integer('dia');
+            $table->string('dia');
             $table->time('hora');
             $table->integer('diaespectador')->default(0);
             $table->timestamps();

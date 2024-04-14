@@ -10,7 +10,7 @@
       <div class="container-compra">
         <h2>Detalles de la Compra</h2>
         <p>Total: {{ total }}€</p>
-        <button @click="insertarCorreo">Comprar</button>
+        <button @click="insertarCorreo" >Comprar</button>
       </div>
     </div>
   </div>
@@ -106,10 +106,12 @@ export default {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(entrada),
+        
       }).then(response => {
         if (response.status == 201) {
           console.log('Entradas compradas correctamente');
           return response.json();
+          
         } else {
           reject('Error al comprar las entradas');
         }
@@ -120,6 +122,7 @@ export default {
         reject(error);
       });
     });
+    
   } else {
     alert('No puedes comprar más de 10 entradas o no hay asientos disponibles');
   }

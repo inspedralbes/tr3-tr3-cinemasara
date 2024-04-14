@@ -2,13 +2,11 @@
     <div class="admin">
         <h1 class="admin-heading">Administración de Películas</h1>
 
-        <!-- Formulario para crear una nueva película -->
         <div class="crear-pelicula">
-            <h2 class="form-heading">Crear Nueva Película</h2>
             <form @submit.prevent="crearPelicula" class="form">
                 <div class="form-group">
                     <label for="titulo" class="form-label">Título:</label>
-                    <input type="text" id="titulo" v-model="nuevaPelicula.titul" required class="form-input">
+                    <input type="text" id="titulo" v-model="nuevaPelicula.titol" required class="form-input">
                 </div>
 
                 <div class="form-group">
@@ -17,7 +15,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="any" class="form-label">Any:</label>
+                    <label for="any" class="form-label">Año:</label>
                     <input type="text" id="any" v-model="nuevaPelicula.any" required class="form-input">
                 </div>
 
@@ -26,7 +24,10 @@
                     <input type="number" id="duracion" v-model="nuevaPelicula.duracio" required class="form-input">
                 </div>
 
-
+                <div class="form-group">
+                    <label for="duracion" class="form-label">Cartel:</label>
+                    <input type="number" id="duracion" v-model="nuevaPelicula.cartell" required class="form-input">
+                </div>
 
                 <button type="submit" class="form-button primary-button">Crear Película</button>
             </form>
@@ -37,7 +38,9 @@
             <h2 class="list-heading">Listado de Películas</h2>
             <ul class="list">
                 <li v-for="pelicula in peliculas" :key="pelicula.id_pelicula" class="list-item">
-                    <span class="pelicula-titulo">{{ pelicula.titul }}</span>
+                    <img class="pelicula-cartell" :src="pelicula.cartell" :alt="pelicula.titol">
+                    <span class="pelicula-titulo">{{ pelicula.titol }}</span>
+                    
                     <div class="list-buttons">
                         <button @click="editarPelicula(pelicula)" class="list-button edit-button">Editar</button>
                         <button @click="borrarPelicula(pelicula)" class="list-button delete-button">Eliminar</button>
@@ -52,7 +55,7 @@
             <form @submit.prevent="actualizarPelicula" class="form">
                 <div class="form-group">
                     <label for="titulo" class="form-label">Título:</label>
-                    <input type="text" id="titulo" v-model="peliculaEditando.titul" required class="form-input">
+                    <input type="text" id="titulo" v-model="peliculaEditando.titol" required class="form-input">
                 </div>
 
                 <div class="form-group">
@@ -61,7 +64,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="any" class="form-label">Género:</label>
+                    <label for="any" class="form-label">Año:</label>
                     <input type="text" id="any" v-model="peliculaEditando.any" required class="form-input">
                 </div>
 
@@ -70,6 +73,10 @@
                     <input type="number" id="duracion" v-model="peliculaEditando.duracio" required class="form-input">
                 </div>
 
+                <div class="form-group">
+                    <label for="duracion" class="form-label">Duración (minutos):</label>
+                    <input type="number" id="duracion" v-model="peliculaEditando.cartell" required class="form-input">
+                </div>
                 <div class="form-buttons">
                     <button type="submit" class="form-button primary-button">Actualizar Película</button>
                     <button @click="cancelarEdicion" class="form-button secondary-button">Cancelar</button>
@@ -88,10 +95,11 @@ export default {
         return {
             peliculas: [],
             nuevaPelicula: {
-                titul: '',
+                titol: '',
                 director: '',
                 any: '',
                 duracio: null,
+                cartell: '',
             },
             peliculaEditando: null,
         };
@@ -110,7 +118,7 @@ export default {
         async crearPelicula() {
             try {
                 await crearPelicula(this.nuevaPelicula);
-                this.nuevaPelicula = { titul: '', director: '', any: '', duracio: null };
+                this.nuevaPelicula = { titul: '', director: '', any: '', duracio: null, cartell: ''};
                 await this.getPeliculas();
             } catch (error) {
                 console.error('Error al crear la película:', error);
@@ -227,13 +235,14 @@ export default {
 .list {
     list-style: none;
     padding: 0;
+    border-radius: 1px solid #333;
 }
 
 .list-item {
     margin-bottom: 10px;
     display: flex;
     align-items: center;
-}
+    }
 
 .list-buttons {
     margin-left: auto;
@@ -254,9 +263,14 @@ export default {
     color: #fff;
 }
 
-.pelicula-portada {
+.pelicula-cartell {
     width: 100px;
     height: auto;
     margin-right: 10px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+    border-color: 1px solid #333;
 }
 </style>
